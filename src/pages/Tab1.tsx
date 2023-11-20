@@ -1,8 +1,6 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonNavLink , IonButton } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import React from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
 import './Tab1.css';
-import Tab2 from './Tab2';
-
 
 const Tab1: React.FC = () => {
   return (
@@ -12,13 +10,30 @@ const Tab1: React.FC = () => {
           <IonTitle>Tab 1</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonButton routerLink="/tab2">Go to Page Two</IonButton>
+      <IonContent fullscreen className="ion-text-center ion-justify-content-center">
+        {/* First Button */}
+        <div className="button-container">
+          <p>Go to Page Two</p>
+          <IonButton routerLink="/tab2">Button 1</IonButton>
+        </div>
 
-        <IonToolbar>
-          <IonTitle size="large">Tab 1</IonTitle>
-        </IonToolbar>
-        <ExploreContainer name="Tab 1 page" />
+        {/* Second Button */}
+        <div className="button-container">
+          <p>Go to Page Three</p>
+          <IonButton routerLink="/tab3">Button 2</IonButton>
+        </div>
+
+        {/* Third Button */}
+        <div className="button-container">
+          <p>Go to Page one</p>
+          <IonButton routerLink="/tab1">Button 3</IonButton>
+        </div>
+
+        {/* Fourth Button */}
+        <div className="button-container">
+          <p>Go to Page Five</p>
+          <IonButton routerLink="/tab2">Button 4</IonButton>
+        </div>
       </IonContent>
     </IonPage>
   );
