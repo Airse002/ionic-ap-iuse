@@ -1,8 +1,13 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonLabel } from '@ionic/react';
 import './Tab1.css';
 
 const Tab1: React.FC = () => {
+
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString();
+
+
   return (
     <IonPage>
       <IonHeader>
@@ -12,8 +17,11 @@ const Tab1: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen className="ion-text-center ion-justify-content-center">
         {/* First Button */}
+
+        
         <div className="button-container">
-          <p>Go to Page Two</p>
+        <IonLabel>Dnes je datum: {formattedDate}</IonLabel>
+          <p> Visit calendar </p>
           <IonButton routerLink="/tab2">Button 1</IonButton>
         </div>
 
