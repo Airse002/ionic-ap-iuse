@@ -27,8 +27,8 @@ const Tab1: React.FC = () => {
 
         {/* Second Button */}
         <div className="button-container">
-          <p>Go to Page Three</p>
-          <IonButton routerLink="/tab3">Button 2</IonButton>
+          <p>Počasí</p>
+          <IonButton expand = "block" routerLink = "/tab3"> Podívej se na počasí</IonButton>
         </div>
 
         {/* Third Button */}
