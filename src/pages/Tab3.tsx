@@ -2,92 +2,54 @@ import { IonContent, IonHeader, IonPage, IonText, IonTitle, IonToolbar } from '@
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import { GoogleApis } from 'googleapis';
+import Event from "../components/Event.js";
 // src/pages/Tab3.tsx
 
-import React, { useEffect, useState } from 'react';
 
-const Tab3: React.FC = () => {
-  const [events, setEvents] = useState<string>('');
-
+import React, { useEffect, useState } from "react";
+//import "./App.css";
+import { gapi } from "gapi-script";
+//import Event from "./components/Event.js";
+ 
+function Tab3() {
+  const [events, setEvents] = useState([]);
+ 
+  const calendarID = 'j.burda.sin@gmail.com';
+  const apiKey = "AIzaSyA1KCGoetZi-OC_WmSn3o-wOT75RDxb-5g";
+  //onst accessToken = process.env.REACT_APP_GOOGLE_ACCESS_TOKEN;
+ 
+  const getEvents = (calendarID: string | undefined, apiKey: string | undefined) => {
+    function initiate() {
+      gapi.client
+        .init({
+          apiKey: apiKey,
+        })
+        .then(function () {
+          return gapi.client.request({
+            path: `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
+          });
+        })
+        .then(
+          (response: { result: { items: any; }; }) => {
+            let events = response.result.items;
+            setEvents(events);
+          },
+          function (err: any) {
+            return [false, err];
+          }
+        );
+    }
+    gapi.load("client", initiate);
+  };
+ 
   useEffect(() => {
-    const CLIENT_ID = '<YOUR_CLIENT_ID>';
-    const API_KEY = '<YOUR_API_KEY>';
-    const DISCOVERY_DOC =
-      'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
-    const SCOPES = 'https://www.googleapis.com/auth/calendar.readonly';
-
-    const loadGoogleCalendarApi = async () => {
-      try {
-        // Load Google API script dynamically
-        const script = document.createElement('script');
-        script.src = 'https://apis.google.com/js/api.js';
-        script.async = true;
-        script.defer = true;
-        script.onload = () => initializeGoogleApi(CLIENT_ID, API_KEY);
-        document.head.appendChild(script);
-      } catch (error) {
-        console.error('Error loading Google Calendar API script:', error.message);
-      }
-    };
-
-    const initializeGoogleApi = async (clientId: string, apiKey: string) => {
-      try {
-        // @ts-ignore
-        await window.gapi.client.init({
-          apiKey,
-          clientId,
-          discoveryDocs: [DISCOVERY_DOC],
-        });
-
-        const tokenClient = window.google.accounts.oauth2.initTokenClient({
-          client_id: clientId,
-          scope: SCOPES,
-        });
-
-        tokenClient.callback = async (resp) => {
-          if (resp.error !== undefined) {
-            throw resp;
-          }
-
-          const request = {
-            calendarId: 'primary',
-            timeMin: new Date().toISOString(),
-            showDeleted: false,
-            singleEvents: true,
-            maxResults: 10,
-            orderBy: 'startTime',
-          };
-
-          const response = await window.gapi.client.calendar.events.list(request);
-
-          const fetchedEvents = response.result.items;
-          if (!fetchedEvents || fetchedEvents.length === 0) {
-            setEvents('No events found.');
-          } else {
-            const eventDetails = fetchedEvents.map(
-              (event) =>
-                `${event.summary} (${event.start.dateTime || event.start.date})`
-            );
-            setEvents('Events:\n' + eventDetails.join('\n'));
-          }
-        };
-
-        if (window.gapi.client.getToken() === null) {
-          tokenClient.requestAccessToken({ prompt: 'consent' });
-        } else {
-          tokenClient.requestAccessToken({ prompt: '' });
-        }
-      } catch (error) {
-        console.error('Error initializing Google Calendar API:', error.message);
-      }
-    };
-
-    // Load Google Calendar API and initiate the authentication process
-    loadGoogleCalendarApi();
-  }, []); // Run only once when the component mounts
-
+    const events = getEvents(calendarID, apiKey);
+    setEvents(events);
+  }, []);
+ 
   return (
     
+
     
     
     <IonPage>
@@ -95,11 +57,21 @@ const Tab3: React.FC = () => {
         <IonToolbar>
           <IonTitle>Google Calendar API Integration</IonTitle>
         </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <IonText>
-          <pre>{events}</pre>
-        </IonText>
+        </IonHeader>
+        <IonContent>
+          
+        <div className="App py-8 flex flex-col justify-center">
+      <h1 className="text-2xl font-bold mb-4">
+        React App with Google Calendar API!
+        <ul>
+          {events?.map((event) => (
+            <li key={event.id} className="flex justify-center">
+              <Event description={event.summary} />
+            </li>
+          ))}
+        </ul>
+      </h1>
+    </div>
       </IonContent>
     </IonPage>
   );
