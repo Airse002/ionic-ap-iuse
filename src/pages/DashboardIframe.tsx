@@ -7,7 +7,7 @@ const DashboardIframe = () => {
     <div className="iframe-container">
       <iframe
         className="responsive-iframe"
-        src="https://elfsight.com/youtube-channel-plugin-yottie/iframe/"   //https://dashboard.satnogs.org/goto/zWeN2S5Ik
+        src="https://elfsight.com/youtube-channel-plugin-yottie/iframe/"   //https://dashboard.satnogs.org/goto/zWeN2S5Ik //https://elfsight.com/youtube-channel-plugin-yottie/iframe/
         frameBorder="0"
         allowFullScreen
       ></iframe>
