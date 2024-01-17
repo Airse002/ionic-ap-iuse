@@ -119,7 +119,7 @@ function Tab3() {
       <IonPage>
       <IonHeader>
       <IonToolbar>
-      <IonTitle>Google Calendar API Integration</IonTitle>
+      <IonTitle>Calendar API Integration</IonTitle>
       </IonToolbar>
       </IonHeader>
       <IonContent>
