@@ -4,12 +4,12 @@ import AppMenuButton from '../components copy/AppMenuButton/AppMenuButton';
 import './Home.css';
 import AppIntroText from '../components copy/AppIntroText/AppIntroText';
 
-const Tab5: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <AppMenuButton />
+        <AppMenuButton />
           <IonTitle>Home</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -17,10 +17,11 @@ const Tab5: React.FC = () => {
         <div id="container">
           <AppLogo />
           <AppIntroText />
+          
         </div>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab5;
+export default Home;

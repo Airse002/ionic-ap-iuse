@@ -4,6 +4,13 @@ import { gapi } from "gapi-script";
 import Event from "../components/Event.js";
 import './Tab3.css';
 import { DatetimeChangeEventDetail, IonDatetimeCustomEvent, IonInputCustomEvent } from "@ionic/core";
+// At the top of your component file
+import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacitor-community/sqlite';
+import { Capacitor } from '@capacitor/core';
+
+const sqliteConnection = new SQLiteConnection(CapacitorSQLite);
+
+
 
 interface Event {
   id: string;
