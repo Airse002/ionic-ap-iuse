@@ -3,8 +3,8 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard,
         IonButtons, IonBackButton, useIonViewWillEnter, useIonViewWillLeave
       } from '@ionic/react';
 import './UsersPage.css';
-import UserForm from '../../components copy/UserForm/UserForm';
-import UserList from '../../components copy/UserList/UserList';
+import UserForm from '../../components/UserForm/UserForm';
+import UserList from '../../components/UserList/UserList';
 import { User } from '../../models/User';
 import { useQuerySQLite } from '../../hooks/UseQuerySQLite';
 import { SQLiteDBConnection } from "@capacitor-community/sqlite";

@@ -1,6 +1,8 @@
 import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection, capSQLiteUpgradeOptions } from '@capacitor-community/sqlite';
 import { Capacitor } from '@capacitor/core';
 
+
+
 export interface ISQLiteService {
     getPlatform(): string
     initWebStore(): Promise<void>
@@ -41,7 +43,15 @@ class SQLiteService implements ISQLiteService {
     }
     async openDatabase(dbName:string, loadToVersion: number,
                 readOnly: boolean): Promise<SQLiteDBConnection>  {
-        this.dbNameVersionDict.set(dbName, loadToVersion);
+        
+        
+        
+        
+        
+        
+        
+        
+                    this.dbNameVersionDict.set(dbName, loadToVersion);
         let encrypted = false;
         const mode = encrypted ? "secret" : "no-encryption";
         try {
@@ -58,7 +68,9 @@ class SQLiteService implements ISQLiteService {
       
             await db.open();
             const res = await db.isDBOpen();
+            console.log("Db returned");
             return db;
+            
           
         } catch(error: any) {
             const msg = error.message ? error.message : error;

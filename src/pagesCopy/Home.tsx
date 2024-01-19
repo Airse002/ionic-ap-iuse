@@ -1,8 +1,8 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import AppLogo from '../components copy/AppLogo/AppLogo';
-import AppMenuButton from '../components copy/AppMenuButton/AppMenuButton';
+import AppLogo from '../components/AppLogo/AppLogo';
+import AppMenuButton from '../components/AppMenuButton/AppMenuButton';
 import './Home.css';
-import AppIntroText from '../components copy/AppIntroText/AppIntroText';
+import AppIntroText from '../components/AppIntroText/AppIntroText';
 
 const Home: React.FC = () => {
   return (

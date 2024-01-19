@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -16,7 +18,7 @@ import {
 import { ellipse, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+//import Tab3 from './pages/Tab3';
 import Tab4 from './pages/Tab4';
 import Tab5 from './pages/Tab5';
 
@@ -24,19 +26,19 @@ import Tab5 from './pages/Tab5';
 
 
 
-import React from 'react';
+
 
 
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages copy/Home';
+//import Home from './pages copy/Home';
 import { Capacitor } from '@capacitor/core';
 import SqliteService from './services/sqliteService';
 import DbVersionService from './services/dbVersionService';
 import StorageService  from './services/storageService';
-import AppInitializer from './components copy/AppInitializer/AppInitializer';
+import AppInitializer from './components/AppInitializer/AppInitializer';
 
-import UsersPage from './pages copy/UsersPage/UsersPage';
-import AppMenu from './components copy/AppMenu/AppMenu';
+import UsersPage from './pagesCopy/UsersPage/UsersPage';
+import AppMenu from './components/AppMenu/AppMenu';
 
 
 
@@ -100,9 +102,7 @@ const App: React.FC = () => {
                     <Route exact path="/tab2">
                       <Tab2 />
                     </Route>
-                    <Route path="/tab3">
-                      <Tab3 />
-                    </Route>
+                  
                     <Route path="/tab4">
                       <Tab4 />
                     </Route>
