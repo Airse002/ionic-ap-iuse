@@ -1,14 +1,15 @@
-/*import React, { useEffect, useState } from "react";
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonDatetime, IonButton, IonInput, IonItem, IonLabel, InputChangeEventDetail } from '@ionic/react';
+import React, { useEffect, useState } from "react";
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonDatetime, IonButton, IonInput, IonItem, IonLabel, InputChangeEventDetail, IonModal } from '@ionic/react';
 import { gapi } from "gapi-script";
 import Event from "../components/Event.js";
 import './Tab3.css';
+
 import { DatetimeChangeEventDetail, IonDatetimeCustomEvent, IonInputCustomEvent } from "@ionic/core";
 // At the top of your component file
-import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacitor-community/sqlite';
-import { Capacitor } from '@capacitor/core';
+//import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacitor-community/sqlite';
+//import { Capacitor } from '@capacitor/core';
 
-const sqliteConnection = new SQLiteConnection(CapacitorSQLite);
+//const sqliteConnection = new SQLiteConnection(CapacitorSQLite);
 
 
 
@@ -22,9 +23,52 @@ function Tab3() {
   const [events, setEvents] = useState<Event[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
   const [newEvent, setNewEvent] = useState({ summary: '', start: '', end: '' });
+  
+  
+  const [showStartPicker, setShowStartPicker] = useState(false);
+  const [showEndPicker, setShowEndPicker] = useState(false);
+
+  // Additional state to store whether the picker is shown or not
+  const [selectedStartTime, setSelectedStartTime] = useState('');
+  const [selectedEndTime, setSelectedEndTime] = useState('');
 
   const calendarID = "j.burda.sin@gmail.com";
   const apiKey = "AIzaSyD4QCWz-9e7Jt_0DAKh3lEYYlg5SXyuAVM"; // Replace with your API key
+  
+
+    // Function to open the date-time picker for event start
+    const openStartPicker = () => {
+      setShowStartPicker(true);
+    };
+  
+      // Function to open the date-time picker for event end
+  const openEndPicker = () => {
+    setShowEndPicker(true);
+  };
+
+
+// Update the start time and hide the picker
+const handleStartChange = (event: CustomEvent) => {
+  setSelectedStartTime(event.detail.value);
+  setShowStartPicker(false);
+};
+
+  // Update the end time and hide the picker
+  const handleEndChange = (event: CustomEvent) => {
+    setSelectedEndTime(event.detail.value);
+    setShowEndPicker(false);
+  };
+
+  const handleDateChange = (event: CustomEvent) => {
+    setSelectedDate(event.detail.value);
+  };
+  
+
+
+
+
+
+
   useEffect(() => {
     // Function to initialize the Google API client
     const initiate = () => {
@@ -79,22 +123,15 @@ function Tab3() {
     gapi.load("client", initiate);
   };
 
-  const handleDateChange = (event: IonDatetimeCustomEvent<DatetimeChangeEventDetail>) => {
-    const value = event.detail.value;
 
-    // Check if value is a string before using it
-    if (typeof value === 'string') {
-      setSelectedDate(value);
-    } else {
-      // Handle the case when value is not a string
-      // For example, you might want to set the selected date to an empty string or a default value
-      setSelectedDate('');
+
+  const handleInputChange = (event: CustomEvent, field: string) => {
+    const inputEvent = event as CustomEvent<InputChangeEventDetail>;
+    if (inputEvent.detail && inputEvent.detail.value !== undefined) {
+      setNewEvent({ ...newEvent, [field]: inputEvent.detail.value });
     }
   };
-
-  const handleInputChange = (e: IonInputCustomEvent<InputChangeEventDetail>, field: string) => {
-    setNewEvent({ ...newEvent, [field]: e.target.value });
-  };
+  
 
   const addEvent = () => {
     const event = {
@@ -134,26 +171,47 @@ function Tab3() {
       <IonDatetime
                firstDayOfWeek={1}
                onIonChange={handleDateChange}
-               //displayFormat="MM/DD/YYYY"
-               placeholder="Select Date"
+               //locale = ""
+               
                value={selectedDate}
              > </IonDatetime>
-      <IonItem>
-        <IonLabel position="floating">Event Title</IonLabel>
-        
-        
-
-        <IonInput value={newEvent.summary} onIonChange={e => handleInputChange(e, 'summary')}></IonInput>
-      </IonItem>
-      <IonItem>
-        <IonLabel position="floating">Start DateTime</IonLabel>
-        <IonInput value={newEvent.start} onIonChange={e => handleInputChange(e, 'start')}></IonInput>
-      </IonItem>
-      <IonItem>
-        <IonLabel position="floating">End DateTime</IonLabel>
-        <IonInput value={newEvent.end} onIonChange={e => handleInputChange(e, 'end')}></IonInput>
-      </IonItem>
-      <IonButton onClick={addEvent}>Add Event</IonButton>
+             <IonItem>
+      <IonButton onClick={openStartPicker}>Event Start</IonButton>
+            <IonModal isOpen={showStartPicker} onDidDismiss={() => setShowStartPicker(false)}>
+              <IonDatetime
+                presentation="date-time"
+                preferWheel={true}
+                value={newEvent.start}
+                onIonChange={handleStartChange}
+              />
+              <IonButton onClick={() => setShowStartPicker(false)}>Done</IonButton>
+            </IonModal>
+            {/* Display the selected start time */}
+            {!showStartPicker && selectedStartTime && (
+              <p>Start: {selectedStartTime}</p>
+            )}
+          </IonItem>
+          <IonItem>
+            <IonButton onClick={openEndPicker}>Event End</IonButton>
+            <IonModal isOpen={showEndPicker} onDidDismiss={() => setShowEndPicker(false)}>
+              <IonDatetime
+                presentation="date-time"
+                preferWheel={true}
+                value={newEvent.end}
+                onIonChange={handleEndChange}
+              />
+              <IonButton onClick={() => setShowEndPicker(false)}>Done</IonButton>
+            </IonModal>
+            {/* Display the selected end time */}
+            {!showEndPicker && selectedEndTime && (
+              <p>End: {selectedEndTime}</p>
+            )}
+          </IonItem>
+          <IonItem>
+            <IonLabel position="floating">Event Description</IonLabel>
+            <IonInput value={newEvent.summary} onIonChange={e => handleInputChange(e, 'summary')}></IonInput>
+          </IonItem>
+          <IonButton onClick={addEvent}>Add Event</IonButton>
 
       <h1>
         <ul>
@@ -165,6 +223,7 @@ function Tab3() {
         </ul>
       </h1>
     </div>
+
   </IonContent>
 </IonPage>
 );

@@ -18,7 +18,7 @@ import {
 import { ellipse, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
-//import Tab3 from './pages/Tab3';
+import Tab3 from './pages/Tab3';
 import Tab4 from './pages/Tab4';
 import Tab5 from './pages/Tab5';
 
@@ -102,7 +102,9 @@ const App: React.FC = () => {
                     <Route exact path="/tab2">
                       <Tab2 />
                     </Route>
-                  
+                    <Route path="/tab3">
+                      <Tab3 />
+                      </Route>
                     <Route path="/tab4">
                       <Tab4 />
                     </Route>
