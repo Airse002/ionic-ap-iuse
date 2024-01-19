@@ -9,7 +9,6 @@
     "build:native": "npm run remove:sql:wasm && npm run build",
     "build": "vite --force build",
     "preview": "vite preview",
-
     "copy:sql:wasm": "copyfiles -u 3 node_modules/sql.js/dist/sql-wasm.wasm public/assets",
     "remove:sql:wasm": "rimraf public/assets/sql-wasm.wasm",
     "ios:start": "npm run remove:sql:wasm && npm run build:native && npx cap sync && npx cap copy && npx cap open ios",
@@ -23,6 +22,7 @@
   },
   "dependencies": {
     "@capacitor-community/sqlite": "^5.5.1-4",
+    "@capacitor/android": "^5.6.0",
     "@capacitor/app": "5.0.6",
     "@capacitor/core": "^5.6.0",
     "@capacitor/haptics": "5.0.6",
