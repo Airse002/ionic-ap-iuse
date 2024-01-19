@@ -11,6 +11,7 @@ import { SQLiteDBConnection } from "@capacitor-community/sqlite";
 import { platform } from '../../App';
 import { SqliteServiceContext, StorageServiceContext } from '../../App';
 import { Toast } from '@capacitor/toast';
+import sqliteService from '../../services/sqliteService';
 
 const UsersPage: React.FC = () => {
   const ref = useRef(false);
@@ -20,26 +21,32 @@ const UsersPage: React.FC = () => {
   const [db, setDb] = useState<SQLiteDBConnection | null>(null);
   const sqliteServ = useContext(SqliteServiceContext);
   const storageServ = useContext(StorageServiceContext);
+  
 
-  const openDatabase = () => {
+  const openDatabase = async () => {
+    console.log("openDatabase called");
     try {
       const dbUsersName = storageServ.getDatabaseName();
+      console.log(`Database name: ${dbUsersName}`);
       dbNameRef.current = dbUsersName;
       const version = storageServ.getDatabaseVersion();
-
-      sqliteServ.openDatabase(dbUsersName, version, false).then((database) => {
-        setDb(database);
-        ref.current = true;
-      });
+      console.log(`Database version: ${version}`);
+    
+      const database = await sqliteServ.openDatabase(dbUsersName, version, false);
+      console.log("Database opened", database);
+      setDb(database);
+      console.log("DbSet properly");
+      ref.current = true;
     } catch (error) {
-      const msg = `Error open database:: ${error}`;
+      const msg = `Error opening database: ${error}`;
       console.error(msg);
       Toast.show({
-        text: `${msg}`,
-        duration: 'long'
-      });           
+        text: msg,
+        duration: 'long',
+      });
     }
-  }
+  };
+  
 
   const handleAddUser = async (newUser: User) => {
     if (db) {
@@ -77,6 +84,7 @@ const UsersPage: React.FC = () => {
   };
 
   useIonViewWillEnter( () => {
+    console.log("useIonViewWillEnter");
     const initSubscription = storageServ.isInitCompleted.subscribe((value) => {
       isInitComplete.current = value;
       if(isInitComplete.current === true) {
@@ -96,6 +104,7 @@ const UsersPage: React.FC = () => {
             });
 
           } else {
+            console.log ("elseOpenDatabase");
             openDatabase();
           }
         }

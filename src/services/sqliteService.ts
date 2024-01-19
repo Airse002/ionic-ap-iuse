@@ -45,12 +45,6 @@ class SQLiteService implements ISQLiteService {
                 readOnly: boolean): Promise<SQLiteDBConnection>  {
         
         
-        
-        
-        
-        
-        
-        
                     this.dbNameVersionDict.set(dbName, loadToVersion);
         let encrypted = false;
         const mode = encrypted ? "secret" : "no-encryption";
@@ -64,11 +58,12 @@ class SQLiteService implements ISQLiteService {
                 db = await this.sqliteConnection
                         .createConnection(dbName, encrypted, mode, loadToVersion, readOnly);
             }
-            const jeepSQlEL = document.querySelector("jeep-sqlite")
+            //const jeepSQlEL = document.querySelector("jeep-sqlite")
       
             await db.open();
             const res = await db.isDBOpen();
             console.log("Db returned");
+            
             return db;
             
           
