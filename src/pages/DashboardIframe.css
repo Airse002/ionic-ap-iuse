@@ -1,23 +1,24 @@
 /* DashboardIframe.css */
 .iframe-container {
-    position: relative;
-    width: 100%; /* Full width */
-    padding-top: 56.25%; /* Aspect ratio of 16:9 */
-    height: 0;
+  position: relative;
+  width: 100%; /* Full width */
+  height: 0; /* Set height to 0 to start with */
+  padding-bottom: 56.25%; /* Aspect ratio of 16:9 - you can adjust this as needed */
+  overflow: hidden; /* Ensures no scrollbars appear */
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; /* Removes the border */
+}
+
+@media (max-width: 600px) {
+  .iframe-container {
+      padding-top: 0; /* Remove padding-top */
+      height: 100vh; /* Full viewport height */
   }
-  
-  .responsive-iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none; /* Removes the border */
-  }
-  
-  @media (max-width: 600px) {
-    .iframe-container {
-      padding-top: 75%; /* Adjust the aspect ratio for smaller devices */
-    }
-  }
-  
+}

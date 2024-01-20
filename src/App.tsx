@@ -126,7 +126,7 @@ const App: React.FC = () => {
                       <IonIcon aria-hidden="true" icon={square} />
                       <IonLabel>Tab 3</IonLabel>
                     </IonTabButton>
-                    <IonTabButton tab="tab4" href="/tab4">
+                    <IonTabButton tab="tab4" href="/home">
                       <IonIcon aria-hidden="true" icon={ellipse} />
                       <IonLabel>Tab 4</IonLabel>
                     </IonTabButton>
