@@ -37,6 +37,9 @@ import DbVersionService from './services/dbVersionService';
 import StorageService  from './services/storageService';
 import AppInitializer from './components/AppInitializer/AppInitializer';
 
+import { createClient } from '@supabase/supabase-js';
+import { SessionContextProvider } from '@supabase/auth-helpers-react';
+
 import UsersPage from './pagesCopy/UsersPage/UsersPage';
 import AppMenu from './components/AppMenu/AppMenu';
 
@@ -70,6 +73,10 @@ export const DbVersionServiceContext = React.createContext(DbVersionService);
 export const StorageServiceContext = React.createContext(new StorageService(SqliteService,DbVersionService));
 
 
+const supabaseUrl = "https://jroifzzyuxcexxazzsjy.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impyb2lmenp5dXhjZXh4YXp6c2p5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDU3Njc0MTAsImV4cCI6MjAyMTM0MzQxMH0.v6iJukk6khR41HDkuPQMxK-fAJRDNMA2pOrsQEvsTS4";
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
 
 setupIonicReact();
 
@@ -78,6 +85,7 @@ const App: React.FC = () => {
 
 
     return (
+      <SessionContextProvider supabaseClient={supabase}>
       <SqliteServiceContext.Provider value={SqliteService}>
       <DbVersionServiceContext.Provider value={DbVersionService}>
         <StorageServiceContext.Provider value={new StorageService(SqliteService,DbVersionService)}>
@@ -141,6 +149,7 @@ const App: React.FC = () => {
         </StorageServiceContext.Provider>
         </DbVersionServiceContext.Provider>
       </SqliteServiceContext.Provider>
+      </SessionContextProvider>
     )
   };
 
