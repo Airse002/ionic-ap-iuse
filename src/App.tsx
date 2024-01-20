@@ -85,42 +85,34 @@ const App: React.FC = () => {
 
 
     return (
-      <SessionContextProvider supabaseClient={supabase}>
-      <SqliteServiceContext.Provider value={SqliteService}>
+
+    <SqliteServiceContext.Provider value={SqliteService}>
       <DbVersionServiceContext.Provider value={DbVersionService}>
-        <StorageServiceContext.Provider value={new StorageService(SqliteService,DbVersionService)}>
+        <StorageServiceContext.Provider value={new StorageService(SqliteService, DbVersionService)}>
           <AppInitializer>
             <IonApp>
               <IonReactRouter>
                 <AppMenu />
                 <IonTabs>
                   <IonRouterOutlet id="main-content">
-                    <Route exact path="/home">
-                      <Home />
-                    </Route>
                     <Route exact path="/">
                       <Redirect to="/home" />
                     </Route>
-                    <Route path="/users" component={UsersPage} />
-          
-                    
-                    <Route exact path="/tab1">
-                      <Tab1 />
-                    </Route>
-                    <Route exact path="/tab2">
-                      <Tab2 />
-                    </Route>
-                    <Route path="/tab3">
-                      <Tab3 />
-                      </Route>
                     <Route exact path="/home">
-                    <Redirect to="/home" />
-                      <Home />
+                      <SessionContextProvider supabaseClient={supabase}>
+                        <Home />
+                      </SessionContextProvider>
                     </Route>
-                    <Route path="/tab5">
-                      <Tab5 />
-                    </Route>
+                    {/* Other routes */}
+                    <Route path="/users" component={UsersPage} />
+                    <Route exact path="/tab1" component={Tab1} />
+                    <Route exact path="/tab2" component={Tab2} />
+                    <Route path="/tab3" component={Tab3} />
+                    <Route path="/tab5" component={Tab5} />
+                    {/* ... other routes ... */}
                   </IonRouterOutlet>
+                  {/* ... IonTabButton components ... */}
+
                   <IonTabBar slot="bottom">
                     <IonTabButton tab="tab1" href="/tab1">
                       <IonIcon aria-hidden="true" icon={triangle} />
@@ -143,88 +135,19 @@ const App: React.FC = () => {
                       <IonLabel>Tab 5</IonLabel>
                     </IonTabButton>
                   </IonTabBar>
+
                 </IonTabs>
               </IonReactRouter>
             </IonApp>
           </AppInitializer>
         </StorageServiceContext.Provider>
-        </DbVersionServiceContext.Provider>
-      </SqliteServiceContext.Provider>
-      </SessionContextProvider>
-    )
-  };
+      </DbVersionServiceContext.Provider>
+    </SqliteServiceContext.Provider>
+  );
+};
+      
+     
 
 
-
-
-
-
-
-
-
-/*
-  <SqliteServiceContext.Provider value={SqliteService}>
-  <DbVersionServiceContext.Provider value={DbVersionService}>
-    <StorageServiceContext.Provider value={new StorageService(SqliteService,DbVersionService)}>
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-
-          <Route path="/tab4">
-            <Tab4 />
-            </Route>
-
-            <Route path="/tab5">
-            <Tab5 />
-            </Route>
-
-
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon aria-hidden="true" icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="tab4" href="/tab4">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 4</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="tab5" href="/tab5">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 5</IonLabel>
-          </IonTabButton>
-
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-  <SqliteServiceContext.Provider value={SqliteService}/>
-      <DbVersionServiceContext.Provider value={DbVersionService}/>
-        <StorageServiceContext.Provider value={new StorageService(SqliteService,DbVersionService)}/>
-       ) }
-;*/
 
 export default App;

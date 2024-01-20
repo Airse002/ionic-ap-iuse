@@ -23,7 +23,9 @@ function Home() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        scopes: 'https://www.googleapis.com/auth/calendar'
+        scopes: 'https://www.googleapis.com/auth/calendar',
+        redirectTo: 'http://localhost:8100/home'
+        
       }
     });
     if(error) {
