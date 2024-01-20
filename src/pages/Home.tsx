@@ -5,7 +5,7 @@ import DateTimePicker from 'react-datetime-picker';
 import { useState } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/react';
 
-function Tab4() {
+function Home() {
   const [ start, setStart ] = useState(new Date());
   const [ end, setEnd ] = useState(new Date());
   const [ eventName, setEventName ] = useState("");
@@ -109,4 +109,4 @@ function Tab4() {
   );
 }
 
-export default Tab4;
+export default Home;
