@@ -4,6 +4,12 @@ import { gapi } from "gapi-script";
 import Event from "../components/Event.js";
 import './Tab3.css';
 
+
+import AppLogo from '../components/AppLogo/AppLogo';
+import AppMenuButton from '../components/AppMenuButton/AppMenuButton';
+import './Home.css';
+import AppIntroText from '../components/AppIntroText/AppIntroText';
+
 import { DatetimeChangeEventDetail, IonDatetimeCustomEvent, IonInputCustomEvent } from "@ionic/core";
 // At the top of your component file
 //import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacitor-community/sqlite';
@@ -163,8 +169,9 @@ const handleStartChange = (event: CustomEvent) => {
       <IonPage>
       <IonHeader>
       <IonToolbar>
-      <IonTitle>Calendar Google API Integration</IonTitle>
-      </IonToolbar>
+          <AppMenuButton />
+          <IonTitle>To do List</IonTitle>
+        </IonToolbar>
       </IonHeader>
       <IonContent>
       <div className="App py-8 flex flex-col justify-center">

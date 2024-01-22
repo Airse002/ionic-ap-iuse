@@ -98,7 +98,7 @@ const UserForm: FC<UserFormProps> = ({ onAddUser }) => {
         type="text"
         value={name}
         onIonInput={handleNameInput}
-        placeholder="Rose Miller"
+        placeholder="new note"
       ></IonInput>
       {/* version 2
         <IonInput
@@ -110,7 +110,7 @@ const UserForm: FC<UserFormProps> = ({ onAddUser }) => {
         ></IonInput>
       */}
       <IonButton expand="full" onClick={handleSubmit} disabled={!isFormValid.current}>
-        Add User
+        Add Note
       </IonButton>
     </div>
   )

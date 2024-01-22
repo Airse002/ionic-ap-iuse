@@ -15,7 +15,7 @@ const AppMenu: React.FC = () => {
         <IonList>
           <IonMenuToggle autoHide={false}>
             <IonItem button routerLink="/users" routerDirection="none">
-              Managing Users
+              To do List
             </IonItem>
             {/* ... other menu items */}
           </IonMenuToggle>

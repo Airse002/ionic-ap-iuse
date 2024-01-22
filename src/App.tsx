@@ -15,7 +15,7 @@ import {
 
 
 
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { ellipse, search, square, star, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
@@ -114,26 +114,21 @@ const App: React.FC = () => {
                   {/* ... IonTabButton components ... */}
 
                   <IonTabBar slot="bottom">
-                    <IonTabButton tab="tab1" href="/tab1">
-                      <IonIcon aria-hidden="true" icon={triangle} />
-                      <IonLabel>Tab 1</IonLabel>
-                    </IonTabButton>
+                    
                     <IonTabButton tab="tab2" href="/tab2">
-                      <IonIcon aria-hidden="true" icon={ellipse} />
-                      <IonLabel>Tab 2</IonLabel>
+                      <IonIcon aria-hidden="true" icon={search} />
+                      <IonLabel>News</IonLabel>
                     </IonTabButton>
                     <IonTabButton tab="tab3" href="/tab3">
-                      <IonIcon aria-hidden="true" icon={square} />
-                      <IonLabel>Tab 3</IonLabel>
-                    </IonTabButton>
-                    <IonTabButton tab="tab4" href="/tab4">
                       <IonIcon aria-hidden="true" icon={ellipse} />
-                      <IonLabel>Tab 4</IonLabel>
+                      <IonLabel>To do List</IonLabel>
                     </IonTabButton>
-                    <IonTabButton tab="tab5" href="/tab5">
-                      <IonIcon aria-hidden="true" icon={ellipse} />
-                      <IonLabel>Tab 5</IonLabel>
+                    <IonTabButton tab="tab4" href="/home">
+                      <IonIcon aria-hidden="true" icon={star} />
+                      <IonLabel>Google Calendar</IonLabel>
                     </IonTabButton>
+                  
+                  
                   </IonTabBar>
 
                 </IonTabs>

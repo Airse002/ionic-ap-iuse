@@ -157,7 +157,7 @@ const UsersPage: React.FC = () => {
   <IonPage>
     <IonHeader>
       <IonToolbar>
-        <IonTitle>Managing Users</IonTitle>
+        <IonTitle>To do List</IonTitle>
         <IonButtons slot="start">
           <IonBackButton text="home" defaultHref="/home"></IonBackButton>
         </IonButtons>
@@ -167,11 +167,11 @@ const UsersPage: React.FC = () => {
       {ref.current && (
         <div>
           <IonCard>
-            <h1>Add New User</h1>
+            <h1>Add Note</h1>
             <UserForm onAddUser={handleAddUser} />
           </IonCard>
           <IonCard>
-            <h2>Current Users</h2>
+            <h2>Notes</h2>
             <UserList users={users} onUpdateUser={handleUpdateUser} 
               onDeleteUser={handleDeleteUser}/>
           </IonCard>
