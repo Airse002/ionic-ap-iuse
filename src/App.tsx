@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AppUrlListener from './pages/AppUrlListener';
+
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -12,8 +14,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 
-
-
+import { SupabaseClientContext, SupabaseClientProvider } from './pages/SupabaseClientContext';
 
 import { ellipse, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
@@ -73,9 +74,9 @@ export const DbVersionServiceContext = React.createContext(DbVersionService);
 export const StorageServiceContext = React.createContext(new StorageService(SqliteService,DbVersionService));
 
 
-const supabaseUrl = "https://jroifzzyuxcexxazzsjy.supabase.co";
+/*const supabaseUrl = "https://jroifzzyuxcexxazzsjy.supabase.co";
 const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impyb2lmenp5dXhjZXh4YXp6c2p5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDU3Njc0MTAsImV4cCI6MjAyMTM0MzQxMH0.v6iJukk6khR41HDkuPQMxK-fAJRDNMA2pOrsQEvsTS4";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const supabase = createClient(supabaseUrl, supabaseAnonKey);*/
 
 
 setupIonicReact();
@@ -85,23 +86,25 @@ const App: React.FC = () => {
 
 
     return (
-
+      
     <SqliteServiceContext.Provider value={SqliteService}>
       <DbVersionServiceContext.Provider value={DbVersionService}>
         <StorageServiceContext.Provider value={new StorageService(SqliteService, DbVersionService)}>
           <AppInitializer>
             <IonApp>
+           
               <IonReactRouter>
-                <AppMenu />
+               <AppUrlListener />
+                <AppMenu /> 
                 <IonTabs>
                   <IonRouterOutlet id="main-content">
                     <Route exact path="/">
                       <Redirect to="/home" />
                     </Route>
                     <Route exact path="/home">
-                      <SessionContextProvider supabaseClient={supabase}>
+                    <SupabaseClientProvider>
                         <Home />
-                      </SessionContextProvider>
+                        </SupabaseClientProvider> 
                     </Route>
                     {/* Other routes */}
                     <Route path="/users" component={UsersPage} />
@@ -138,11 +141,13 @@ const App: React.FC = () => {
 
                 </IonTabs>
               </IonReactRouter>
+              
             </IonApp>
           </AppInitializer>
         </StorageServiceContext.Provider>
       </DbVersionServiceContext.Provider>
     </SqliteServiceContext.Provider>
+    
   );
 };
       

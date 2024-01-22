@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Ionic APIuse</string>
     <string name="title_activity_main">Ionic APIuse</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">com.io.ionic.starter</string>
+    <string name="package_name">georgesappzeus</string>
+    <string name="custom_url_scheme">georgesappzeus</string>
 </resources>
