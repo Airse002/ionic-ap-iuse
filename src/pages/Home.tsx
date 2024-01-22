@@ -24,7 +24,7 @@ function Home() {
       provider: 'google',
       options: {
         scopes: 'https://www.googleapis.com/auth/calendar',
-        redirectTo: 'http://localhost:8100/home'
+        redirectTo: 'com.io.ionic.starter://'
         
       }
     });
