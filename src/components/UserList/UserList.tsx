@@ -26,7 +26,7 @@ const UserList: FC<UserListProps> = ({users, onUpdateUser, onDeleteUser}) => {
               checked={user.active === 1}
               onIonChange={() => handleCheckboxChange(user)}
             ></IonCheckbox>
-              {user.id} - {user.name}
+               {user.name}
             <IonButton
             slot="end"
             fill="clear"

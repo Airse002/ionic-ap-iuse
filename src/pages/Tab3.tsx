@@ -4,6 +4,8 @@ import { gapi } from "gapi-script";
 import Event from "../components/Event.js";
 import './Tab3.css';
 
+import { useDarkMode } from '../components/DarkModeProvider';
+
 
 import AppLogo from '../components/AppLogo/AppLogo';
 import AppMenuButton from '../components/AppMenuButton/AppMenuButton';
@@ -26,6 +28,8 @@ interface Event {
 }
 
 function Tab3() {
+  const { darkMode, toggleDarkMode } = useDarkMode();
+
   const [events, setEvents] = useState<Event[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString());
   const [newEvent, setNewEvent] = useState({ summary: '', start: '', end: '' });
@@ -175,12 +179,14 @@ const handleStartChange = (event: CustomEvent) => {
       </IonHeader>
       <IonContent>
       <div className="App py-8 flex flex-col justify-center">
-      <IonDatetime
+      <IonDatetime  
+      
                firstDayOfWeek={1}
                onIonChange={handleDateChange}
                //locale = ""
                
                value={selectedDate}
+               
              > </IonDatetime>
              <IonItem>
       <IonButton onClick={openStartPicker}>Event Start</IonButton>

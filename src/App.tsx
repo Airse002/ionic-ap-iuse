@@ -23,7 +23,7 @@ import Home from './pages/Home';
 import Svatky from './pages/Svatky';
 
 
-
+import DarkModeProvider from './components/DarkModeProvider';
 
 
 
@@ -82,6 +82,13 @@ setupIonicReact();
 
 const App: React.FC = () => {
 
+    // Example: Use a state variable to toggle between light and dark modes
+    const [darkMode, setDarkMode] = React.useState(false);
+
+    // Function to toggle the theme mode
+    const toggleTheme = () => {
+      setDarkMode(!darkMode);
+    };
 
 
     return (
@@ -90,7 +97,8 @@ const App: React.FC = () => {
       <DbVersionServiceContext.Provider value={DbVersionService}>
         <StorageServiceContext.Provider value={new StorageService(SqliteService, DbVersionService)}>
           <AppInitializer>
-            <IonApp>
+            <DarkModeProvider>
+          <IonApp>
               <IonReactRouter>
                 <AppMenu />
                 <IonTabs>
@@ -136,6 +144,7 @@ const App: React.FC = () => {
                 </IonTabs>
               </IonReactRouter>
             </IonApp>
+            </DarkModeProvider>
           </AppInitializer>
         </StorageServiceContext.Provider>
       </DbVersionServiceContext.Provider>

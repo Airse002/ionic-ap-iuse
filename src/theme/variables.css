@@ -4,12 +4,14 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+
+
+  --ion-color-primary: #ff7f00; /* Your preferred shade of orange */
+  --ion-color-primary-rgb: 255,127,0; /* The RGB value of your preferred shade of orange */
+  --ion-color-primary-contrast: #ffffff; /* A contrasting color for text and other elements on the primary color */
+  --ion-color-primary-contrast-rgb: 255,255,255; /* RGB value for the contrast color */
+  --ion-color-primary-shade: #e06f00; /* A slightly darker shade of the primary color */
+  --ion-color-primary-tint: #ff8f20; /* A slightly lighter tint of the primary color */
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -59,6 +61,10 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-dark-shade: #1e2023;
   --ion-color-dark-tint: #383a3e;
 
+/* Add dark theme colors here */
+--ion-background-color: #000; /* Black background */
+--ion-text-color: #b6c531; /* White text */
+
   /** medium **/
   --ion-color-medium: #92949c;
   --ion-color-medium-rgb: 146, 148, 156;
@@ -74,6 +80,11 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+}
+
+.ion-datetime {
+  --background: var(--ion-color-primary-tint);
+  --text-color: var(--ion-color-primary-contrast);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -146,6 +157,12 @@ http://ionicframework.com/docs/theming/ */
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
   }
+  /* Add dark theme colors here */
+  .ion-color-orange {
+    --ion-color-base: #ff6a00; /* Orange color for buttons */
+    --ion-color-contrast: #fff; /* Contrast color for text on buttons */
+  }
+
 
   /*
    * iOS Dark Theme
