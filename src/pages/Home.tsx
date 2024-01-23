@@ -3,13 +3,17 @@ import logo from './logo.svg';
 import { useSession, useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react';
 import DateTimePicker from 'react-datetime-picker';
 import { useState } from 'react';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonDatetime } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonDatetime, IonLabel } from '@ionic/react';
+import Svatky from '../pages/Svatky';
 
 function Home() {
   const [ start, setStart ] = useState(new Date());
   const [ end, setEnd ] = useState(new Date());
   const [ eventName, setEventName ] = useState("");
   const [ eventDescription, setEventDescription ] = useState("");
+
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString();
 
   const session = useSession(); // tokens, when session exists we have a user
   const supabase = useSupabaseClient(); // talk to supabase!
@@ -128,9 +132,13 @@ function Home() {
               <IonButton onClick={signOut}>Sign Out</IonButton>
             </>
             :
+            
             <IonButton expand="full" onClick={googleSignIn}>Sign In With Google</IonButton>
+            
           }
         </div>
+        <IonLabel>Dnes je datum: {formattedDate}</IonLabel>
+        <Svatky />
       </IonContent>
     </IonPage>
   );

@@ -20,7 +20,7 @@ import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import Home from './pages/Home';
-import Tab5 from './pages/Tab5';
+import Svatky from './pages/Svatky';
 
 
 
@@ -108,7 +108,7 @@ const App: React.FC = () => {
                     <Route exact path="/tab1" component={Tab1} />
                     <Route exact path="/tab2" component={Tab2} />
                     <Route path="/tab3" component={Tab3} />
-                    <Route path="/tab5" component={Tab5} />
+                    <Route path="/svatky" component={Svatky} />
                     {/* ... other routes ... */}
                   </IonRouterOutlet>
                   {/* ... IonTabButton components ... */}
@@ -127,6 +127,8 @@ const App: React.FC = () => {
                       <IonIcon aria-hidden="true" icon={star} />
                       <IonLabel>Google Calendar</IonLabel>
                     </IonTabButton>
+           
+                    
                   
                   
                   </IonTabBar>
